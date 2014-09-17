@@ -7,7 +7,7 @@ var errors = require('../errors'),
 function get_storage() {
     // TODO: this is where the check for storage apps should go
     // Local file system is the default
-    // var storageChoice = 'localfilesystem';
+    var storageChoice = 's3';
 
     if (storage) {
         return storage;
@@ -15,10 +15,7 @@ function get_storage() {
 
     try {
         // TODO: determine if storage has all the necessary methods
-        storage = require('./s3')({
-            errors: errors,
-            config: require('../config')().aws
-        });
+        storage = require('./' + storageChoice);
     } catch (e) {
         errors.logError(e);
     }
