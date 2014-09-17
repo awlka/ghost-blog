@@ -15,7 +15,10 @@ function get_storage() {
 
     try {
         // TODO: determine if storage has all the necessary methods
-        storage = require('./' + storageChoice);
+        storage = require('./s3')({
+            errors: errors,
+            config: require('../config')().aws
+        });
     } catch (e) {
         errors.logError(e);
     }
