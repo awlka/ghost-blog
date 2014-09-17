@@ -1,5 +1,8 @@
 var errors = require('../errors'),
-    storage;
+    storage = require('./s3')({
+        errors: errors,
+        config: require('../config')().aws
+    });
 
 function get_storage() {
     // TODO: this is where the check for storage apps should go
